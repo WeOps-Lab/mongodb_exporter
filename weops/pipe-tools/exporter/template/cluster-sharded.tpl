@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb-exporter-cluster-{{VERSION}}
+  name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
   namespace: mongodb
 spec:
-  serviceName: mongodb-exporter-cluster-{{VERSION}}
+  serviceName: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb-exporter-cluster-{{VERSION}}
+      app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
   template:
     metadata:
       annotations:
@@ -45,9 +45,9 @@ spec:
         telegraf.influxdata.com/limits-cpu: '300m'
         telegraf.influxdata.com/limits-memory: '300Mi'
       labels:
-        app: mongodb-exporter-cluster-{{VERSION}}
+        app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
         exporter_object: mongodb
-        object_mode: cluster
+        object_mode: {{ARCHITECTURE}}
         object_version: {{VERSION}}
         pod_type: exporter
     spec:
@@ -55,7 +55,7 @@ spec:
         node-role: worker
       shareProcessNamespace: true
       containers:
-      - name: mongodb-exporter-cluster-{{VERSION}}
+      - name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
         image: registry-svc:25000/library/mongodb-exporter:latest
         imagePullPolicy: Always
         securityContext:
@@ -83,8 +83,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mongodb-exporter-cluster-{{VERSION}}
-  name: mongodb-exporter-cluster-{{VERSION}}
+    app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+  name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
   namespace: mongodb
   annotations:
     prometheus.io/scrape: "true"
@@ -96,4 +96,4 @@ spec:
     protocol: TCP
     targetPort: 9216
   selector:
-    app: mongodb-exporter-cluster-{{VERSION}}
+    app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}

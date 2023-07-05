@@ -1,0 +1,38 @@
+commonLabels:
+  object: mongodb
+  mode: sharded
+
+mongos:
+  nodeSelector:
+    node-role: worker
+  readinessProbe:
+    enabled: false
+  livenessProbe:
+    enabled: false
+  useStatefulSet: true
+
+
+shardsvr:
+  persistence:
+    enabled: false
+
+configsvr:
+  persistence:
+    enabled: false
+  readinessProbe:
+    enabled: false
+  livenessProbe:
+    enabled: false
+
+auth:
+  rootPassword: "123456"
+
+volumePermissions:
+  enabled: true
+
+service:
+  type: NodePort
+
+
+
+  
