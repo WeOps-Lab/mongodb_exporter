@@ -1,0 +1,32 @@
+commonLabels:
+  object: mongodb
+
+nodeSelector:
+    node-role: worker
+
+persistence:
+  enabled: false
+
+auth:
+  rootPassword: "123456"
+
+volumePermissions:
+  enabled: true
+
+readinessProbe:
+  enabled: false
+
+livenessProbe:
+  enabled: false
+
+useStatefulSet: true
+
+service:
+  type: NodePort
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 300Mi
+
+  
