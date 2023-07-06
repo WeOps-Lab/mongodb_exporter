@@ -142,7 +142,7 @@ func (d *topCollector) collect(ch chan<- prometheus.Metric) {
 	for namespace, metrics := range totals {
 		labels := d.topologyInfo.baseLabels()
 		db, coll := splitNamespace(namespace)
-		labels["database"] = db
+		labels["datname"] = db
 		labels["collection"] = coll
 
 		mm, ok := metrics.(primitive.M) // ingore entries like -> "note" : "all times in microseconds"

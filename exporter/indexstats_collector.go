@@ -120,7 +120,7 @@ func (d *indexstatsCollector) collect(ch chan<- prometheus.Metric) {
 			// same, for different collections.
 			prefix := "indexstats"
 			labels := d.topologyInfo.baseLabels()
-			labels["database"] = database
+			labels["datname"] = database
 			labels["collection"] = collection
 			labels["key_name"] = indexName
 

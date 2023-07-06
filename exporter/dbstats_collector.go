@@ -89,7 +89,7 @@ func (d *dbstatsCollector) collect(ch chan<- prometheus.Metric) {
 
 		// Since all dbstats will have the same fields, we need to use a label
 		// to differentiate metrics between different databases.
-		labels["database"] = db
+		labels["datname"] = db
 
 		newMetrics := makeMetrics(prefix, dbStats, labels, d.compatibleMode)
 		for _, metric := range newMetrics {
