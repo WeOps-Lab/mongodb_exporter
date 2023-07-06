@@ -7,9 +7,9 @@ for version in v3-6 v4-0 v4-2 v4-4 v5-0 v6-0; do
 
   # 集群
   cluster_output_file="cluster_${version}.yaml"
-  sed "s/{{VERSION}}/${version}/g; s/{{ARCHITECTURE}}/cluster/g" cluster-sharded.tpl >> ../cluster/${cluster_output_file}
+  sed "s/{{VERSION}}/${version}/g;" cluster.tpl >> ../cluster/${cluster_output_file}
 
   # 分片
   sharded_output_file="sharded_${version}.yaml"
-  sed "s/{{VERSION}}/${version}/g; s/{{ARCHITECTURE}}/sharded/g" cluster-sharded.tpl >> ../sharded/${sharded_output_file}
+  sed "s/{{VERSION}}/${version}/g;" sharded.tpl >> ../sharded/${sharded_output_file}
 done

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+  name: mongodb-exporter-cluster-{{VERSION}}
   namespace: mongodb
 spec:
-  serviceName: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+  serviceName: mongodb-exporter-cluster-{{VERSION}}
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+      app: mongodb-exporter-cluster-{{VERSION}}
   template:
     metadata:
       annotations:
@@ -45,9 +45,9 @@ spec:
         telegraf.influxdata.com/limits-cpu: '300m'
         telegraf.influxdata.com/limits-memory: '300Mi'
       labels:
-        app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+        app: mongodb-exporter-cluster-{{VERSION}}
         exporter_object: mongodb
-        object_mode: {{ARCHITECTURE}}
+        object_mode: cluster
         object_version: {{VERSION}}
         pod_type: exporter
     spec:
@@ -55,7 +55,7 @@ spec:
         node-role: worker
       shareProcessNamespace: true
       containers:
-      - name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+      - name: mongodb-exporter-cluster-{{VERSION}}
         image: registry-svc:25000/library/mongodb-exporter:latest
         imagePullPolicy: Always
         securityContext:
@@ -65,14 +65,14 @@ spec:
           - --collect-all
         env:
         - name: MONGODB_URI
-          value: "mongodb://root:123456@mongodb-rs-{{VERSION}}-headless.mongodb:27017/admin"
+          value: "mongodb://weops:Weops%23%40%24123@mongodb-cluster-{{VERSION}}-headless.mongodb:27017/weops"
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
           limits:
-            cpu: 300m
-            memory: 300Mi
+            cpu: 500m
+            memory: 500Mi
         ports:
         - containerPort: 9216
 
@@ -81,8 +81,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
-  name: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+    app: mongodb-exporter-cluster-{{VERSION}}
+  name: mongodb-exporter-cluster-{{VERSION}}
   namespace: mongodb
   annotations:
     prometheus.io/scrape: "true"
@@ -94,4 +94,4 @@ spec:
     protocol: TCP
     targetPort: 9216
   selector:
-    app: mongodb-exporter-{{ARCHITECTURE}}-{{VERSION}}
+    app: mongodb-exporter-cluster-{{VERSION}}

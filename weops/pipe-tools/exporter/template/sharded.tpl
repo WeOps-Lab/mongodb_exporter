@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongodb-exporter-standalone-{{VERSION}}
+  name: mongodb-exporter-sharded-{{VERSION}}
   namespace: mongodb
 spec:
-  serviceName: mongodb-exporter-standalone-{{VERSION}}
+  serviceName: mongodb-exporter-sharded-{{VERSION}}
   replicas: 1
   selector:
     matchLabels:
-      app: mongodb-exporter-standalone-{{VERSION}}
+      app: mongodb-exporter-sharded-{{VERSION}}
   template:
     metadata:
       annotations:
@@ -45,9 +45,9 @@ spec:
         telegraf.influxdata.com/limits-cpu: '300m'
         telegraf.influxdata.com/limits-memory: '300Mi'
       labels:
-        app: mongodb-exporter-standalone-{{VERSION}}
+        app: mongodb-exporter-sharded-{{VERSION}}
         exporter_object: mongodb
-        object_mode: standalone
+        object_mode: sharded
         object_version: {{VERSION}}
         pod_type: exporter
     spec:
@@ -55,7 +55,7 @@ spec:
         node-role: worker
       shareProcessNamespace: true
       containers:
-      - name: mongodb-exporter-standalone-{{VERSION}}
+      - name: mongodb-exporter-sharded-{{VERSION}}
         image: registry-svc:25000/library/mongodb-exporter:latest
         imagePullPolicy: Always
         securityContext:
@@ -65,14 +65,14 @@ spec:
           - --collect-all
         env:
         - name: MONGODB_URI
-          value: "mongodb://weops:Weops%23%40%24123@mongodb-standalone-{{VERSION}}.mongodb:27017/weops"
+          value: "mongodb://weops:Weops%23%40%24123@mongodb-sd-{{VERSION}}-mongodb-sharded.mongodb:27017/weops"
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
           limits:
-            cpu: 500m
-            memory: 500Mi
+            cpu: 300m
+            memory: 300Mi
         ports:
         - containerPort: 9216
 
@@ -81,8 +81,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mongodb-exporter-standalone-{{VERSION}}
-  name: mongodb-exporter-standalone-{{VERSION}}
+    app: mongodb-exporter-sharded-{{VERSION}}
+  name: mongodb-exporter-sharded-{{VERSION}}
   namespace: mongodb
   annotations:
     prometheus.io/scrape: "true"
@@ -94,4 +94,4 @@ spec:
     protocol: TCP
     targetPort: 9216
   selector:
-    app: mongodb-exporter-standalone-{{VERSION}}
+    app: mongodb-exporter-sharded-{{VERSION}}

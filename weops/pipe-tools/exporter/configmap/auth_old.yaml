@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: old-standalone-init
+  namespace: mongodb
+data:
+  auth.js: |
+    use admin;
+    db.auth('root', 'Weops#@$123');
+    use weops;
+    db.createUser({
+      user: 'weops',
+      pwd: 'Weops#@$123',
+      roles: [{ role: 'read', db: 'weops' }]
+    });
+    db.grantRolesToUser('weops', [{ role: 'clusterMonitor', db: 'admin' }]);

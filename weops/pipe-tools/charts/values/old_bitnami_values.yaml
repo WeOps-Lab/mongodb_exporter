@@ -28,16 +28,3 @@ resources:
   limits:
     cpu: 400m
     memory: 500Mi
-
-initdbScripts:
-  auth.js: |
-    use admin;
-    db.auth('root', 'Weops#@$123');
-    use weops;
-    db.createUser({
-      user: 'weops',
-      pwd: 'Weops#@$123',
-      roles: [{ role: 'read', db: 'weops' }],
-      mechanisms: ['SCRAM-SHA-256']
-    });
-    db.grantRolesToUser('weops', [{ role: 'clusterMonitor', db: 'admin' }]);

@@ -18,6 +18,11 @@ mongos:
 shardsvr:
   persistence:
     enabled: false
+  dataNode:
+    livenessProbe:
+      enabled: false
+    readinessProbe:
+      enabled: false
 
 configsvr:
   persistence:
@@ -28,14 +33,11 @@ configsvr:
     enabled: false
 
 auth:
-  rootPassword: "123456"
+  rootPassword: "Weops#@$123"
 
 volumePermissions:
   enabled: true
 
 service:
   type: NodePort
-
-
-
   
