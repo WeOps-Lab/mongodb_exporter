@@ -63,8 +63,6 @@ spec:
           runAsUser: 0
         args:
           - --collect-all
-          - --mongodb.global-conn-pool
-          - --compatible-mode
         env:
         - name: MONGODB_URI
           value: "mongodb://root:123456@mongodb-rs-{{VERSION}}-headless.mongodb:27017/admin"
