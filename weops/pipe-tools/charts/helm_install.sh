@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# 3.6 集群和分片需要手动进入mongodb授权
 # 部署监控对象
 object=mongodb
 object_versions=("3.6.23" "4.0.27" "4.2.21" "4.4.0" "5.0" "6.0.7")
