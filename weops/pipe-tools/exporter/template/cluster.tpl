@@ -63,6 +63,7 @@ spec:
           runAsUser: 0
         args:
           - --collect-all
+          - --timeout=3
         env:
         - name: MONGODB_URI
           value: "mongodb://weops:Weops%23%40%24123@mongodb-cluster-{{VERSION}}-headless.mongodb:27017/weops"
