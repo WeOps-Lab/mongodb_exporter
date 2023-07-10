@@ -59,6 +59,7 @@ type GlobalFlags struct {
 
 	DiscoveringMode bool `name:"discovering-mode" help:"Enable autodiscover collections" negatable:""`
 	CompatibleMode  bool `name:"compatible-mode" help:"Enable old mongodb-exporter compatible metrics" default:"true" negatable:""`
+	ConnectTimeOut  int  `name:"timeout" help:"Connect to mongodb timeout in seconds" env:"TIMEOUT" default:"10"`
 	Version         bool `name:"version" help:"Show version and exit"`
 }
 
@@ -133,6 +134,7 @@ func buildExporter(opts GlobalFlags) *exporter.Exporter {
 
 		CollStatsLimit: opts.CollStatsLimit,
 		CollectAll:     opts.CollectAll,
+		ConnectTimeOut: opts.ConnectTimeOut,
 	}
 
 	e := exporter.New(exporterOpts)

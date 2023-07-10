@@ -76,6 +76,7 @@ type Opts struct {
 	URI                   string
 	WebListenAddress      string
 	TLSConfigPath         string
+	ConnectTimeOut        int
 }
 
 var (
@@ -262,7 +263,7 @@ func (e *Exporter) Handler() http.Handler {
 		if err != nil {
 			seconds = 10
 		}
-
+		seconds = e.opts.ConnectTimeOut
 		var client *mongo.Client
 		ctx, cancel := context.WithTimeout(r.Context(), time.Duration(seconds)*time.Second)
 		defer cancel()
