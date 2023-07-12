@@ -145,7 +145,7 @@ mongodb低于3.6版本(例如3.4)可能会缺少部分监控指标，还可能�
 | mongodb_ss_uptime                                   | MongoDB已运行时间            | -                                         | -                        | s                      |
 | mongodb_ss_mem_virtual                              | MongoDB虚拟内存使用大小         | -                                         | -                        | mebibytes              |
 | mongodb_ss_mem_resident                             | MongoDB常驻内存使用大小         | -                                         | -                        | mebibytes              |
-| mongodb_op_counters_total                           | MongoDB操作计数器总数          | type                                      | 操作类型                     | -                      |
+| mongodb_ss_opcounters                               | MongoDB操作计数器总数          | legacy_op_type                            | 操作类型                     | -                      |
 | mongodb_ss_metrics_document                         | MongoDB文档数              | doc_op_type                               | 文档操作类型                   | -                      |
 | mongodb_ss_asserts                                  | MongoDB断言数              | assert_type                               | 断言类型                     | -                      |
 | mongodb_ss_connections                              | MongoDB连接数信息            | conn_type                                 | 连接类型                     | -                      |
@@ -154,7 +154,7 @@ mongodb低于3.6版本(例如3.4)可能会缺少部分监控指标，还可能�
 | mongodb_ss_metrics_getLastError_wtime_num           | MongoDB写操作等待超时次数        | -                                         | -                        | -                      |
 | mongodb_ss_metrics_cursor_open                      | MongoDB打开的游标数           | csr_type                                  | 游标类型                     | -                      |
 | mongodb_ss_metrics_cursor_timedOut                  | MongoDB游标超时次数           | -                                         | -                        | -                      |
-| mongodb_top_writeLock_count                         | MongoDB top 写入锁计数       | collection, datname                       | 集合名称, 数据库名称              | -                      |
+| mongodb_top_writeLock_count                         | MongoDB top 写入锁数量       | collection, datname                       | 集合名称, 数据库名称              | -                      |
 | mongodb_ss_globalLock_activeClients_total           | MongoDB全局锁活跃中的总客户端数     | -                                         | -                        | -                      |
 | mongodb_ss_globalLock_activeClients_readers         | MongoDB全局锁活跃中的读取客户端数    | -                                         | -                        | -                      |
 | mongodb_ss_globalLock_activeClients_writers         | MongoDB全局锁活跃中的写入客户端数    | -                                         | -                        | -                      |
@@ -169,6 +169,7 @@ mongodb低于3.6版本(例如3.4)可能会缺少部分监控指标，还可能�
 | mongodb_dbstats_fsUsedSize                          | MongoDB文件系统使用大小         | datname                                   | 数据库名称                    | bytes                  |
 | mongodb_dbstats_totalSize                           | MongoDB数据总大小            | datname                                   | 数据库名称                    | bytes                  |
 | mongodb_dbstats_objects                             | MongoDB对象数量             | datname                                   | 数据库名称                    | -                      |
+| mongodb_dbstats_views                               | MongoDB视图数量             | datname                                   | 数据库名称                    | -                      |
 | mongodb_rs_members_optimeDate                       | MongoDB Oplog时间戳        | member_state                              | 成员角色                     | datetime(milliseconds) |
 | mongodb_mongod_replset_oplog_head_timestamp         | MongoDB副本集操作日志头部的时间戳    | -                                         | -                        | datetime(seconds)      |
 | mongodb_mongod_replset_oplog_tail_timestamp         | MongoDB副本集操作日志尾部的时间戳    | -                                         | -                        | datetime(seconds)      |
@@ -185,7 +186,6 @@ mongodb低于3.6版本(例如3.4)可能会缺少部分监控指标，还可能�
 | process_resident_memory_bytes                       | MongoDB进程常驻内存大小         | -                                         | -                        | bytes                  |
 | process_virtual_memory_bytes                        | MongoDB进程虚拟内存大小         | -                                         | -                        | bytes                  |
 | collector_scrape_time_ms                            | MongoDB监控探针最近一次抓取时长     | collector, exporter                       | 采集器, 探针类型                | ms                     |
-
 
 ### 版本日志
 
