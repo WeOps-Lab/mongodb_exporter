@@ -180,11 +180,11 @@ mongodb低于3.6版本(例如3.4)可能会缺少部分监控指标，还可能�
 | mongodb_rs_members_state                            | MongoDB副本集成员状态          | member_idx, member_state, rs_nm, rs_state | 成员ID, 成员角色, 副本集名称, 副本集状态 | -                      |
 | mongodb_rs_members_health                           | MongoDB副本集成员健康状态        | member_idx, member_state, rs_nm, rs_state | 成员ID, 成员角色, 副本集名称, 副本集状态 | -                      |
 | mongodb_members_pingMs                              | MongoDB副本集中成员之间的心跳延迟平均值 | member_state                              | 成员角色                     | ms                     |
-| process_cpu_seconds_total                           | MongoDB进程CPU秒数总计        | -                                         | -                        | s                      |
-| process_max_fds                                     | MongoDB进程最大文件描述符数       | -                                         | -                        | -                      |
-| process_open_fds                                    | MongoDB进程打开文件描述符数       | -                                         | -                        | -                      |
-| process_resident_memory_bytes                       | MongoDB进程常驻内存大小         | -                                         | -                        | bytes                  |
-| process_virtual_memory_bytes                        | MongoDB进程虚拟内存大小         | -                                         | -                        | bytes                  |
+| process_cpu_seconds_total                           | MongoDB探针进程CPU秒数总计      | -                                         | -                        | s                      |
+| process_max_fds                                     | MongoDB探针进程最大文件描述符数     | -                                         | -                        | -                      |
+| process_open_fds                                    | MongoDB探针进程打开文件描述符数     | -                                         | -                        | -                      |
+| process_resident_memory_bytes                       | MongoDB探针进程常驻内存大小       | -                                         | -                        | bytes                  |
+| process_virtual_memory_bytes                        | MongoDB探针进程虚拟内存大小       | -                                         | -                        | bytes                  |
 | collector_scrape_time_ms                            | MongoDB监控探针最近一次抓取时长     | collector, exporter                       | 采集器, 探针类型                | ms                     |
 
 ### 版本日志
