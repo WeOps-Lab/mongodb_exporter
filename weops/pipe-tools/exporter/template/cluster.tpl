@@ -62,11 +62,16 @@ spec:
           allowPrivilegeEscalation: false
           runAsUser: 0
         args:
+          - --mongodb.host=mongodb-cluster-{{VERSION}}-headless.mongodb
+          - --mongodb.port=27017
+          - --mongodb.db=weops
           - --collect-all
           - --timeout=3
         env:
-        - name: MONGODB_URI
-          value: "mongodb://weops:Weops%23%40%24123@mongodb-cluster-{{VERSION}}-headless.mongodb:27017/weops"
+        - name: MONGODB_USER
+          value: "weops"
+        - name: MONGODB_PASSWORD
+          value: "Weops%23%40%24123"
         resources:
           requests:
             cpu: 100m
